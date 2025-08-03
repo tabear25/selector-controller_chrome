@@ -13,9 +13,9 @@
   ],
 
   "icons": {
-    "16": "assets/icons/icon16.png",
-    "48": "assets/icons/icon48.png",
-    "128": "assets/icons/icon128.png"
+    "16": "assets/icons/for_toolbar.png",
+    "48": "assets/icons/for_management.png",
+    "128": "assets/icons/for_chromestore.png"
   },
 
   "action": {

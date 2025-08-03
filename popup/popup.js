@@ -1,4 +1,4 @@
-// Popup UI controller
+// Popup UI controller  — this file is a plain ES module (type="module" in popup.html)
 
 const list = document.getElementById('list');
 
@@ -34,7 +34,6 @@ function sendMessage(msg) {
 }
 
 async function refreshList() {
-  const data = await chrome.storage.session.get('selectorQueue');
-  const q = data.selectorQueue || [];
-  list.innerHTML = q.map(sel => `<li><code>${sel}</code></li>`).join('');
+  const { textQueue = [] } = await chrome.storage.session.get('textQueue');
+  list.innerHTML = textQueue.map(t => `<li>${t}</li>`).join('');
 }
