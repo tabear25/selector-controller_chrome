@@ -1,39 +1,25 @@
 {
   "manifest_version": 3,
-  "name": "Selector Collector",
-  "description": "Click‑to‑collect ordered CSS/XPath selectors & copy to clipboard.",
-  "version": "1.0.0",
-
-  "permissions": [
-    "activeTab",
-    "scripting",
-    "storage",
-    "clipboardWrite",
-    "clipboardRead"
-  ],
-
+  "name": "Selector-Collector",
+  "version": "0.8.0",
+  "action": { "default_popup": "popup/popup.html" },
   "icons": {
-    "16": "assets/icons/icon16.png",
-    "48": "assets/icons/icon48.png",
-    "128": "assets/icons/icon128.png"
-  },
-
-  "action": {
-    "default_title": "Selector Collector",
-    "default_popup": "popup/popup.html"
-  },
-
-  "background": {
-    "service_worker": "src/background.js",
-    "type": "module"
-  },
-
+    "16": "assets/icons/for_toolbar.png",
+    "48": "assets/icons/for_management.png",
+    "128": "assets/icons/for_chromestore.png"
+ },
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "storage",
+    "clipboardWrite"
+  ],
+  "host_permissions": ["<all_urls>"],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["http://*/*", "https://*/*"],
       "js": ["src/content.js"],
-      "run_at": "document_end",
-      "all_frames": true
+      "run_at": "document_idle"
     }
   ]
 }
