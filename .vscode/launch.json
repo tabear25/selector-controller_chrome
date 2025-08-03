@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "name": "Launch Chrome With Extension",
+      "request": "launch",
+      "url": "about:blank",
+      "runtimeArgs": [
+        "--disable-extensions-except=${workspaceFolder}",
+        "--load-extension=${workspaceFolder}"
+      ]
+    }
+  ]
+}
