@@ -1,6 +1,6 @@
 /**
- * Build a unique & stable CSS selector for a DOM element.
- * Falls back to XPath when a safe CSS path is impossible (e.g. in SVG or selector‑hostile markup).
+ * DOM 要素に対してユニークで安定したセレクタを生成する。
+ * セレクタの生成が難しい場合は XPath にフォールバックする。
  */
 export function buildSelector(el, { preferCss = true } = {}) {
   if (preferCss) {
@@ -10,6 +10,9 @@ export function buildSelector(el, { preferCss = true } = {}) {
   return getXPath(el);
 }
 
+/**
+ * 要素から CSS セレクタのパスを構築する。
+ */
 function cssPath(el) {
   if (el.id) return `#${CSS.escape(el.id)}`;
   const path = [];
@@ -26,6 +29,9 @@ function cssPath(el) {
   return path.join(' > ');
 }
 
+/**
+ * 生成したセレクタが一意かどうかを判定する。
+ */
 function isUniqueSelector(el, selector) {
   try {
     const matches = el.ownerDocument.querySelectorAll(selector);
@@ -35,6 +41,9 @@ function isUniqueSelector(el, selector) {
   }
 }
 
+/**
+ * 再帰的に XPath を構築する。
+ */
 function getXPath(el) {
   if (el.id) return `//*[@id="${el.id}"]`;
   return (
