@@ -1,8 +1,15 @@
+/**
+ * ページ上でテキスト要素を選択して収集するコンテンツスクリプト。
+ */
+// コンテンツスクリプトの初期化ログ
 console.log('[SC] loaded', location.href);
 
+// 選択した要素をハイライトする CSS スタイル
 const HIGHLIGHT_STYLE =
   'outline: 2px solid rgba(255,0,0,.7); outline-offset: 2px;';
+// 選択モードが有効かどうか
 let selecting = false;
+// クリックで収集したテキストのキュー
 let queue = [];
 
 // ── message handler ────────────────────────────────────────────
@@ -20,16 +27,25 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   }
 });
 
+/**
+ * 選択モードを有効化し、クリックイベントを捕捉する。
+ */
 function enable() {
   document.addEventListener('click', onClick, true);
   document.body.style.cursor = 'crosshair';
 }
 
+/**
+ * 選択モードを無効化して状態を元に戻す。
+ */
 function disable() {
   document.removeEventListener('click', onClick, true);
   document.body.style.cursor = '';
 }
 
+/**
+ * クリックされた要素からテキストを取得し、キューに追加する。
+ */
 function onClick(e) {
   if (!selecting) return;
   e.preventDefault();
@@ -45,6 +61,9 @@ function onClick(e) {
   chrome.storage.local.set({ textQueue: queue });
 }
 
+/**
+ * 一時的に要素をハイライト表示する。
+ */
 function flash(el) {
   const prev = el.getAttribute('data-sc-prev') ?? '';
   if (!el.hasAttribute('data-sc-prev'))
