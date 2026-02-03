@@ -9,7 +9,7 @@
 - **Google Chrome 115 以上**（Manifest V3 対応版）
 - デスクトップ環境（Windows / macOS / Linux）
 - 拡張機能の「デベロッパーモード」を有効化できる権限（後述）
-  )
+    - Cometでも動きました
 
 ## 必要なライブラリ（Required Libraries）
 
